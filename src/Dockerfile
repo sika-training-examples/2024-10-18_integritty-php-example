@@ -1,3 +1,3 @@
-FROM php:8.2-apache
+FROM --platform=linux/amd64 php:8.2-apache
 RUN pecl install redis && docker-php-ext-enable redis
 COPY . /var/www/html/

@@ -6,6 +6,7 @@ variables:
 
 stages:
   - build
+  - deploy
 
 build:
   stage: build
@@ -18,4 +19,19 @@ build:
       --context ./src
       --dockerfile ./src/Dockerfile
       --destination $IMAGE
+
+deploy dev:
+  stage: deploy
+  script:
+    - |
+      slu gitlab update-file \
+        --gitlab-url https://gitlab.sikalabs.com \
+        --token $ARGOCD_COMMITTER_TOKEN \
+        --project-id $ARGOCD_APPS_PROJECT_ID \
+        --branch $ARGOCD_APPS_BRANCH \
+        --file $IMAGE_VALUES_FILE_DEV \
+        --content "image: $IMAGE" \
+        --committer-email "integritty-bot@gitlab.sikalabs.io" \
+        --committer-name "[bot] integritty-bot" \
+        --commit-message "[auto] feat(example): Update image using CI ($TAG)"
 

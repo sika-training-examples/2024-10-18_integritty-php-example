@@ -8,3 +8,5 @@ services:
     build: ./src
     volumes:
       - ./src:/var/www/html
+  redis:
+    image: redis

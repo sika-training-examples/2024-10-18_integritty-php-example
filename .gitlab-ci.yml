@@ -29,7 +29,7 @@ deploy dev:
         --token $ARGOCD_COMMITTER_TOKEN \
         --project-id $ARGOCD_APPS_PROJECT_ID \
         --branch $ARGOCD_APPS_BRANCH \
-        --file $IMAGE_VALUES_FILE_DEV \
+        --file apps/sikademo/example/example.image.values.yml \
         --content "image: $IMAGE" \
         --committer-email "integritty-bot@gitlab.sikalabs.io" \
         --committer-name "[bot] integritty-bot" \
